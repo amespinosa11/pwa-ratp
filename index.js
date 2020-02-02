@@ -3,6 +3,11 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
+// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+const functions = require('firebase-functions');
+
+// The Firebase Admin SDK to access the Firebase Realtime Database.
+const admin = require('firebase-admin');
 
 /**
  * Gets the weather forecast from the Dark Sky API for the given location.
@@ -12,10 +17,7 @@ const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
  */
 function getDefault(req, resp) {
     console.log('FUNCIONA');
-    resp.sendFile(__dirname + '/index.html');
-    //resp.json({});
-    // https://medium.com/dev-channel/learn-how-to-build-a-pwa-in-under-5-minutes-c860ad406ed
-    // https://www.twilio.com/blog/2018/06/installable-web-apps-practical-introduction-progressive-web-apps.html
+    resp.sendFile(__dirname + '/public/index.html');
   }
 
 /**
@@ -52,5 +54,5 @@ function startServer() {
       console.log('Local DevServer Started on port 8000...');
     });
   }
-  
+  admin.initializeApp();
   startServer();

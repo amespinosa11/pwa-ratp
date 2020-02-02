@@ -19,6 +19,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
+    "firebase-admin": "^8.9.2",
+    "firebase-functions": "^3.3.0",
+    "localforage": "^1.7.3",
     "node-fetch": "^2.6.0"
-  }
+  },
+  "engines": { "node": "8" }
 }

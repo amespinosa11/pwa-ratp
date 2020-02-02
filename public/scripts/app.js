@@ -1,6 +1,13 @@
 (function () {
     'use strict';
 
+    // Set config to use IndexedDB
+    localforage.config({
+        driver      : localforage.INDEXEDDB,
+        name        : 'pwa-ratp',
+        version     : 1.0
+    });
+
     var app = {
         isLoading: true,
         visibleCards: {},
@@ -9,6 +16,32 @@
         cardTemplate: document.querySelector('.cardTemplate'),
         container: document.querySelector('.main'),
         addDialog: document.querySelector('.dialog-container')
+    };
+
+    /*
+     * Fake timetable data that is presented when the user first uses the app,
+     * or when the user has not saved any stations. See startup code for more
+     * discussion.
+     */
+
+    var initialStationTimetable = {
+
+        key: 'metros/1/bastille/A',
+        label: 'Bastille, Direction La Défense',
+        created: '2017-07-18T17:08:42+02:00',
+        schedules: [
+            {
+                message: '0 mn'
+            },
+            {
+                message: '2 mn'
+            },
+            {
+                message: '5 mn'
+            }
+        ]
+
+
     };
 
 
@@ -40,6 +73,16 @@
         }
         app.getSchedule(key, label);
         app.selectedTimetables.push({key: key, label: label});
+        
+        // Add and update new card
+        localforage.setItem('timetables', app.selectedTimetables).then(function (value) {
+            // Do other things once the value has been saved.
+            console.log(value);
+        }).catch(function(err) {
+            // This code runs if there were any errors
+            console.log(err);
+        });
+
         app.toggleAddDialog(false);
     });
 
@@ -136,36 +179,10 @@
 
     // Iterate all of the cards and attempt to get the latest timetable data
     app.updateSchedules = function () {
-        var keys = Object.keys(app.visibleCards);
-        keys.forEach(function (key) {
-            app.getSchedule(key);
+        //var keys = Object.keys(app.visibleCards);
+        app.selectedTimetables.forEach(function (key) {
+            app.getSchedule(key.key, key.label);
         });
-    };
-
-    /*
-     * Fake timetable data that is presented when the user first uses the app,
-     * or when the user has not saved any stations. See startup code for more
-     * discussion.
-     */
-
-    var initialStationTimetable = {
-
-        key: 'metros/1/bastille/A',
-        label: 'Bastille, Direction La Défense',
-        created: '2017-07-18T17:08:42+02:00',
-        schedules: [
-            {
-                message: '0 mn'
-            },
-            {
-                message: '2 mn'
-            },
-            {
-                message: '5 mn'
-            }
-        ]
-
-
     };
 
 
@@ -180,8 +197,25 @@
      *   SimpleDB (https://gist.github.com/inexorabletash/c8069c042b734519680c)
      ************************************************************************/
 
-    app.getSchedule('metros/1/bastille/A', 'Bastille, Direction La Défense');
-    app.selectedTimetables = [
-        {key: initialStationTimetable.key, label: initialStationTimetable.label}
-    ];
+    app.loadData =  function() {
+        // Get items of IndexedDB. Otherwise load default data
+        localforage.getItem('timetables').then(function(value) {
+            app.selectedTimetables = value ? value : [
+                {key: initialStationTimetable.key, label: initialStationTimetable.label}
+            ]; 
+            for(let v of app.selectedTimetables) {
+                app.getSchedule(v.key, v.label);
+            }
+        }).catch(function(err) {
+            // This code runs if there were any errors
+            app.selectedTimetables = [
+                {key: initialStationTimetable.key, label: initialStationTimetable.label}
+            ];
+            console.log(err);
+        });
+    }
+
+    app.loadData();
+    //app.getSchedule('metros/1/bastille/A', 'Bastille, Direction La Défense');
+    
 })();
