@@ -12,4 +12,4 @@ Esta es una PWA que permite consultar los horarios de algunas de las estaciones 
 Como se puede observar en la categoria PWA se obtiene 12/13 en la calificación lo que da 92%.
 
 ## Despligue
-La aplicación se encuentra desplegada con Firebase y se puede visualizar en el siguiente [aquí](https://pwa-metro-paris.firebaseapp.com)
+La aplicación se encuentra desplegada con Firebase y se puede visualizar en el siguiente [aquí](https://pwa-metro-paris.firebaseapp.com){:target="_blank"}
