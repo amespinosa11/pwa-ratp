@@ -5,7 +5,7 @@ Esta es una PWA que permite consultar los horarios de algunas de las estaciones 
 ## Reporte Google Lighthouse antes de implementar las funcionalidades
 ![alt text](https://github.com/amespinosa11/pwa-ratp/blob/master/public/images/reporte_1.PNG)
 ## Reporte Google Lighthouse después de implementar las funcionalidades
-![alt text](https://github.com/amespinosa11/pwa-ratp/blob/master/public/images/reporte_2.pmg)
+![alt text](https://github.com/amespinosa11/pwa-ratp/blob/master/public/images/reporte_2.png)
 
 ![alt text](https://github.com/amespinosa11/pwa-ratp/blob/master/public/images/pwa_reporte.PNG)
 
