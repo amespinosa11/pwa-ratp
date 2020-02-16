@@ -4,7 +4,7 @@
 //const CACHE_NAME = 'static-cache-v1';
 const CACHE_NAME = 'static-cache-v3';
 const DATA_CACHE_NAME = 'data-cache-v3';
-console.log('Hello from service-worker.js');
+//console.log('Hello from service-worker.js');
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
   '/',
@@ -17,10 +17,9 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener('fetch', (evt) => {
-  console.log('[ServiceWorker] Fetch', evt.request.url);
-  // CODELAB: Add fetch event handler here.
+  //console.log('[ServiceWorker] Fetch', evt.request.url);
   if (evt.request.url.includes('/')) {
-    console.log('[Service Worker] Fetch (data)', evt.request.url);
+    //console.log('[Service Worker] Fetch (data)', evt.request.url);
     evt.respondWith(
         caches.open(DATA_CACHE_NAME).then((cache) => {
           return fetch(evt.request)

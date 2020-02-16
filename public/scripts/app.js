@@ -140,6 +140,7 @@
         }
 
         if (app.isLoading) {
+            window.cardLoadTime = performance.now();
             app.spinner.setAttribute('hidden', true);
             app.container.removeAttribute('hidden');
             app.isLoading = false;
@@ -198,6 +199,7 @@
      ************************************************************************/
 
     app.loadData =  function() {
+        window.initialLoadTime = performance.now();
         // Get items of IndexedDB. Otherwise load default data
         localforage.getItem('timetables').then(function(value) {
             app.selectedTimetables = value ? value : [

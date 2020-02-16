@@ -16,7 +16,6 @@ const admin = require('firebase-admin');
  * @param {Response} resp response object from Express.
  */
 function getDefault(req, resp) {
-    console.log('FUNCIONA');
     resp.sendFile(__dirname + '/public/index.html');
   }
 
@@ -38,7 +37,6 @@ function startServer() {
       const path = `"${req.method} ${req.path}"`;
       const m = `${req.ip} - ${time} - ${path}`;
       // eslint-disable-next-line no-console
-      console.log(m);
       next();
     });
   
