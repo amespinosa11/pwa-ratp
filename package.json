@@ -19,8 +19,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
-    "firebase-admin": "^8.9.2",
-    "firebase-functions": "^3.3.0",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^3.24.1",
     "localforage": "^1.7.3",
     "node-fetch": "^2.6.0"
   },
